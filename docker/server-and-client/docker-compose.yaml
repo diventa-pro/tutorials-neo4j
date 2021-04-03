@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+
+  # references:
+  # https://hub.docker.com/_/neo4j/
+  neo4j:
+    image: neo4j:4.2.4
+    container_name: neo4j-server
+    restart: always
+    ports:
+      # HTTP port
+      - "7474:7474"
+      # Bolt port
+      - "7687:7687"
+    environment: 
+      NEO4J_AUTH: none
+
+
