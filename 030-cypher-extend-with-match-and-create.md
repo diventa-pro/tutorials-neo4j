@@ -1,4 +1,5 @@
-    // Aggiungiamo vari cittadini a varie città
+Aggiungiamo vari cittadini a varie città
+
     MATCH(c:Città {nome:"Milano"})
     CREATE(p1:Cittadino {nome:"Sara"})
     CREATE(p1)-[:RESIDENZA {dal:"1990-02-23"}]->(c)
@@ -12,8 +13,9 @@ __Attenzione__
 quando si combinano
 `MATCH` e `CREATE`.
 
-    // Attenzione!
-    // Cosa succede con questo costrutto?
+Attenzione!
+Cosa succede con questo costrutto?
+
     MATCH(c:Città)
     MATCH(p:Cittadino {nome:"Sara"})
     CREATE(p)-[:LAVORA_A]->(c)
@@ -24,8 +26,9 @@ quando si combinano
 __Attenzione__
 a quando si usa `CREATE` ripetutamente.
 
-    // Attenzione!
-    // Cosa succede con questo costrutto?
+Attenzione!
+Cosa succede con questo costrutto?
+
     MATCH(c:Città {nome:"Milano"})
     MATCH(p:Cittadino {nome:"Sara"})
     CREATE(p)-[:LAVORA_A]->(c)
