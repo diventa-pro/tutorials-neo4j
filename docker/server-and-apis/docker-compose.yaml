@@ -13,13 +13,30 @@ services:
     ports:
       # HTTP port
       - "7474:7474"
+
       # Bolt port
       - "7687:7687"
+
+    volumes:
+      - ./storage/data:/data
+
     environment: 
+
+      # No authentication needed
       NEO4J_AUTH: none
+
+      # Optional libs to enable:
+      # * apoc - APOC stands for Awesome Procedures on Cypher
+      #   APOC allows developers to use a standard library for common procedures 
+      #   and only write their own functionality for business logic and use-case-specific needs.
+      # * graph-data-science - This library provides efficiently implemented, 
+      #   parallel versions of common graph algorithms for Neo4j, exposed as Cypher procedures.
+      NEO4JLABS_PLUGINS: "[\"apoc\",\"graph-data-science\"]"
+
+      # https://neo4j.com/labs/apoc/4.1/config/
       NEO4J_apoc_export_file_enabled: "true"
       NEO4J_apoc_import_file_enabled: "true"
       NEO4J_apoc_import_file_use__neo4j__config: "true"
-      NEO4JLABS_PLUGINS: "[\"apoc\",\"graph-data-science\"]"
+      
 
 
