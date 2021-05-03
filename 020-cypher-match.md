@@ -610,14 +610,6 @@ Le recensioni di un film.
 
     MATCH ()-[r:REVIEWED]-(m:Movie)
     RETURN m.title, r.rating
-    
-
-
-
-
-
-
-
 
 Troviamo le città
     
