@@ -34,9 +34,44 @@ Trovare questi casi:
     Trovare i cugini di una certa persona.
     Trovare i nipoti di una persona.
     Trovare i figli di una certa coppia.
-    
-    
-    
 
+Database
+
+Cancelliamo tutti i nod
+
+    match (n) detach delete n   
+
+Creiamo il DB
+
+    CREATE (gigi:Persona {nome:"Gigi"})
+    CREATE (gianna:Persona {nome:"Gianna"})
+    CREATE (ludo:Persona {nome:"Ludovico"})
+    CREATE (lara:Persona {nome:"Lara"})
+    CREATE (ludo)-[:FIGLIO_DI]->(gianna)
+    CREATE (ludo)-[:FIGLIO_DI]->(gigi)
+    CREATE (lara)-[:FIGLIO_DI]->(gianna)
+    CREATE (lara)-[:FIGLIO_DI]->(gigi)
+    CREATE (carlo:Persona {nome:"Carlo"})
+    CREATE (chiara:Persona {nome:"Chiara"})
+    CREATE (andrea:Persona {nome:"Andrea"})
+    CREATE (anna:Persona {nome:"Anna"})
+    CREATE (andrea)-[:FIGLIO_DI]->(carlo)
+    CREATE (andrea)-[:FIGLIO_DI]->(chiara)
+    CREATE (anna)-[:FIGLIO_DI]->(carlo)
+    CREATE (anna)-[:FIGLIO_DI]->(chiara)
+    CREATE (rosa:Persona {nome:"Rosalinda"})
+    CREATE (roberta:Persona {nome:"Roberta"})
+    CREATE (rosa)-[:FIGLIO_DI]->(anna)
+    CREATE (rosa)-[:FIGLIO_DI]->(ludo)
+    CREATE (roberta)-[:FIGLIO_DI]->(anna)
+    CREATE (roberta)-[:FIGLIO_DI]->(ludo)
+
+Visualizziamo
+
+    match(n) return n
+
+Trovare i geniori di una certa persona
+
+    
 
   
