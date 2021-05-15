@@ -3,6 +3,7 @@ import traceback
 
 class BasicUsage:
 
+
     def demo_just_connection(self, neo4j_uri, neo4j_username, neo4j_password):
         print(f"Collegandosi al database {neo4j_uri}.")
         driver = GraphDatabase.driver(neo4j_uri, auth=(neo4j_username, neo4j_password))
@@ -30,6 +31,7 @@ class BasicUsage:
         print(f"Scollegandosi dal database {neo4j_uri}.")
         driver.close()
         print(f"Scollegato dal database {neo4j_uri}.")
+
 
     def demo_read_query_result(self, neo4j_uri, neo4j_username, neo4j_password):
 
@@ -65,6 +67,7 @@ class BasicUsage:
         driver.close()
         print(f"Scollegato dal database {neo4j_uri}.")
 
+
     def demo_with_arguments(self, neo4j_uri, neo4j_username, neo4j_password, citta_da_cercare):
 
         driver = GraphDatabase.driver(neo4j_uri, auth=(neo4j_username, neo4j_password))
@@ -92,7 +95,6 @@ class BasicUsage:
         print(f"Scollegandosi dal database {neo4j_uri}.")
         driver.close()
         print(f"Scollegato dal database {neo4j_uri}.")
-
 
 
 if __name__ == "__main__":
