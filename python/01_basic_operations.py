@@ -100,8 +100,8 @@ class BasicUsage:
 if __name__ == "__main__":
 
     basic = BasicUsage()
-    basic.demo_just_connection("bolt://localhost:7687", "", "")
-    basic.demo_create_nodes("bolt://localhost:7687", "", "")
+    # basic.demo_just_connection("bolt://localhost:7687", "", "")
+    # basic.demo_create_nodes("bolt://localhost:7687", "", "")
     basic.demo_read_query_result("bolt://localhost:7687", "", "")
-    basic.demo_with_arguments("bolt://localhost:7687", "", "", "Napoli")
-    basic.demo_with_arguments("bolt://localhost:7687", "", "", "Palermo")
+    # basic.demo_with_arguments("bolt://localhost:7687", "", "", "Napoli")
+    # basic.demo_with_arguments("bolt://localhost:7687", "", "", "Palermo")
