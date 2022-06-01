@@ -546,6 +546,10 @@ Ricerca
 
 Tutti i nodi
 
+	MATCH ()
+	
+	MATCH (v)
+
     MATCH (n) RETURN n
 
 Tutti i nodi con label :Movie
@@ -555,7 +559,22 @@ Tutti i nodi con label :Movie
 Tutti i nodi con una certa proprietà a prescindere dalla label
 
     MATCH (t {name: "Tom Hanks"}) RETURN t
+	
+Oppure	
+	
     MATCH (c {title: "Cloud Atlas"}) RETURN c
+	
+Si possono anche restituire più risultati di match nella stessa query	
+	
+	MATCH (c {title: "Cloud Atlas"})
+	MATCH (t {name: "Tom Hanks"})
+	RETURN c, t
+	
+Ma questo restituisce niente:
+	
+	MATCH (c {title: "The Motrix"})
+	MATCH (t {name: "Tom Hanks"})
+	RETURN c, t	
 
 Limitare il numero di nodi restituiti
 
@@ -565,6 +584,10 @@ Limitare il numero di nodi restituiti
 Selezione nodi in base alle proprietà:
 
     MATCH (nineties:Movie) WHERE nineties.released >= 1990 AND nineties.released < 2000 RETURN nineties.title
+	
+	MATCH (nineties:Movie) WHERE nineties.released >= 1999 AND nineties.released < 2000 RETURN nineties.title, nineties.released
+
+	MATCH (nineties:Movie) WHERE nineties.released >= 1999 AND nineties.released < 2000 RETURN nineties
 
 ### Proiezione
 
@@ -577,6 +600,15 @@ Scegliere le proprietà da restituire
 
 I film in cui Tom Hanks ha partecipato come attore
 
+	MATCH ()-->()
+	MATCH (:Person)-->()
+	MATCH (:Person)-->(:Movie)
+	MATCH (:Person)-[:ACTED_IN]->(:Movie)
+	MATCH (:Person {name: "Tom Hanks"})-[:ACTED_IN]->(:Movie)
+	MATCH (:Person {name: "Tom Hanks"})-[:ACTED_IN]->(m:Movie) RETURN m
+	MATCH (:Person {name: "Tom Hanks"})-[:ACTED_IN]->(m:Movie) RETURN m.title
+	
+
     MATCH (tom:Person {name: "Tom Hanks"})-[:ACTED_IN]->(tomHanksMovies) RETURN tom,tomHanksMovies
 
 I film in cui Tom Hanks ha avuto un ruolo
@@ -586,16 +618,24 @@ I film in cui Tom Hanks ha avuto un ruolo
 Si noti che in un film, Tom Hanks è stato sia regista che attore, quindi 
 appare due volte.
 
-    MATCH({name: "Tom Hanks"})--(m:Movie) RETURN DISTICT m.title
+    MATCH({name: "Tom Hanks"})--(m:Movie) RETURN DISTINCT m.title
 
 Chi ha diretto Cloud Atlas
+
+    MATCH (directors)-[:DIRECTED]->(cloudAtlas {title: "Cloud Atlas"}) RETURN directors.name
 
     MATCH (cloudAtlas {title: "Cloud Atlas"})<-[:DIRECTED]-(directors) RETURN directors.name    
 
 Chi è stato attore negli stessi film di Tom Hanks.
 Si noti che Tom Hanks non viene riportato.
 
-    MATCH (tom:Person {name:"Tom Hanks"})-[:ACTED_IN]->(m)<-[:ACTED_IN]-(coActors) RETURN coActors.name
+La logica è questa:
+
+	MATCH (:Person (che è TH))-->(:Movie)<--(:Person (il collega!))
+
+LA query è questa:
+
+    MATCH (tom:Person {name:"Tom Hanks"})-[:ACTED_IN]->(m)<-[:ACTED_IN]-(coActors) RETURN DISTINCT coActors.name
 
 Im che modo le :Person sono relazionate ad un certo film:
 

@@ -23,7 +23,9 @@ Un riferimento ad un nodo.
 
     (<reference>)
 
-Creare nodi con vari riferimenti
+> Per inserire delle sequenze di comandi dalla GUI Web di Neo4j, espandere la console, poi premere <SHIFT>+<INVIO> per inserire una nuova linea
+
+Creare nodi con vari riferimenti:
 
     CREATE(pippo)
     CREATE(pluto)
