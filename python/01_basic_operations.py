@@ -2,9 +2,20 @@ from neo4j import GraphDatabase
 import traceback
 
 class BasicUsage:
+    """
+    Dimostra l'utilizzo base della libreria neo4j.
+
+    Ogni metodo rappresenta un caso particolare di uso della libreria.
+    """
 
 
     def demo_just_connection(self, neo4j_uri, neo4j_username, neo4j_password):
+        """
+        Il primo passo per utilizzare Neo4j da Python è quello di collegarsi al server Neo4j,
+        e poi scollegarsi dopo aver realizzato le operazioni necessarie.
+        Il collegamento è ottenuto dal metodo '.driver()'.
+        """
+
         print(f"Collegandosi al database {neo4j_uri}.")
         driver = GraphDatabase.driver(neo4j_uri, auth=(neo4j_username, neo4j_password))
 
@@ -16,6 +27,17 @@ class BasicUsage:
 
 
     def demo_create_nodes(self, neo4j_uri, neo4j_username, neo4j_password):
+        """
+        Come creare nodi.
+
+        1. Il primo passo è quello di ottenere una sessione di lavoro dal driver,
+
+        2. Utilizzare poi tale sessione per inoltrare i comandi Cypher dedicati alla creazione.
+
+        3. Chiudere la sessione
+
+        4. Chiudere il driver.
+        """
 
         print(f"Collegandosi al database {neo4j_uri}.")
         driver = GraphDatabase.driver(neo4j_uri, auth=(neo4j_username, neo4j_password))
@@ -74,8 +96,7 @@ class BasicUsage:
 
         session = driver.session()
         result = session.run("match (c:Citta {nome:$nome}) "
-                             "return c.nome as nome, c.popolazione as popolazione"
-                             "WHERE c.popolazione > $popminima ",
+                             "return c.nome as nome, c.popolazione as popolazione",
                              nome=citta_da_cercare)
         print(result)
 
@@ -103,8 +124,8 @@ class BasicUsage:
 if __name__ == "__main__":
 
     basic = BasicUsage()
-    # basic.demo_just_connection("bolt://localhost:7687", "", "")
-    # basic.demo_create_nodes("bolt://localhost:7687", "", "")
+    basic.demo_just_connection("bolt://localhost:7687", "", "")
+    basic.demo_create_nodes("bolt://localhost:7687", "", "")
     basic.demo_read_query_result("bolt://localhost:7687", "", "")
-    # basic.demo_with_arguments("bolt://localhost:7687", "", "", "Napoli")
-    # basic.demo_with_arguments("bolt://localhost:7687", "", "", "Palermo")
+    basic.demo_with_arguments("bolt://localhost:7687", "", "", "Napoli")
+    basic.demo_with_arguments("bolt://localhost:7687", "", "", "Palermo")

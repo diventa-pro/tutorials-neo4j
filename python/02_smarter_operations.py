@@ -40,12 +40,6 @@ class SmarterOperations:
         with self.driver.session() as session:
             return session.run("match (n) detach delete n return count(n)").single()[0]
 
-    def cheapest_path(self):
-        # MATCH path=(origin :Citta {nome:"Genova"})-[:COLLEGAMENTO*]->(destination :Citta {nome:"Roma"})
-        # return path
-        return None
-
-
 if __name__ == "__main__":
 
     demo = SmarterOperations("bolt://localhost:7687", "", "")
