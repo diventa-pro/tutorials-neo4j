@@ -23,7 +23,7 @@ class BasicUsage:
 
         session = driver.session()
         session.run("create(:Citta{nome:\"Milano\", popolazione:1.2})")
-        session.run("create(:Citta{nome:\"Roma\", popolazione:3.0})")
+        session.run('create(:Citta{nome:"Roma", popolazione:3.0})')
         session.run("create(:Citta{nome:\"Torino\", popolazione:0.9})")
         session.run("create(:Citta{nome:\"Napoli\", popolazione:2.1})")
         session.close()
@@ -73,7 +73,10 @@ class BasicUsage:
         driver = GraphDatabase.driver(neo4j_uri, auth=(neo4j_username, neo4j_password))
 
         session = driver.session()
-        result = session.run("match (c:Citta {nome:$nome}) return c.nome as nome, c.popolazione as popolazione", nome=citta_da_cercare)
+        result = session.run("match (c:Citta {nome:$nome}) "
+                             "return c.nome as nome, c.popolazione as popolazione"
+                             "WHERE c.popolazione > $popminima ",
+                             nome=citta_da_cercare)
         print(result)
 
         iterable_result = iter(result)
