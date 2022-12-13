@@ -1,6 +1,12 @@
 Prima di tutto creare l'ambiente dedicato 
 con `virtualenv`.
 
+Se `virtualenv` non è installato:
+
+    pip install virtualenv
+
+Poi...
+
     virtualenv venv
     venv\Scripts\activate.bat
 

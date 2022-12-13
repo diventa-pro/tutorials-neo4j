@@ -95,9 +95,9 @@ class BasicUsage:
         driver = GraphDatabase.driver(neo4j_uri, auth=(neo4j_username, neo4j_password))
 
         session = driver.session()
-        result = session.run("match (c:Citta {nome:$nome}) "
+        result = session.run("match (c:Citta {nome:$name}) "
                              "return c.nome as nome, c.popolazione as popolazione",
-                             nome=citta_da_cercare)
+                             name=citta_da_cercare)
         print(result)
 
         iterable_result = iter(result)
